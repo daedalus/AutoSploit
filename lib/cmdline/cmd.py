@@ -65,6 +65,13 @@ class AutoSploitParser(argparse.ArgumentParser):
                           help="pass the path to your framework if it is not in your ENV PATH")
         misc.add_argument("--ethics", action="store_true", dest="displayEthics",
                           help=argparse.SUPPRESS)  # easter egg!
+        misc.add_argument("--scripted", action="store_true", dest="scripted",
+                          help=argparse.SUPPRESS)  # easter egg!
+        misc.add_argument("--dry-run", action="store_true", dest="dry_run",
+                          help=argparse.SUPPRESS)  # easter egg!
+
+
+        
         opts = parser.parse_args()
         return opts
 
@@ -163,5 +170,7 @@ class AutoSploitParser(argparse.ArgumentParser):
                 loaded_modules,
                 open(lib.settings.HOST_FILE).readlines(),
                 ruby_exec=opt.rubyExecutableNeeded,
-                msf_path=opt.pathToFramework
+                msf_path=opt.pathToFramework,
+                scripted=opt.scripted,
+                dry_run=opt.dry_run
             ).start_exploit()
